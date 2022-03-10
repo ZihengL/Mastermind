@@ -30,9 +30,6 @@ import utils.Toolbox;
  * V 2.0
  */
 public class Mastermind_GUI extends JFrame {
-	/**
-	 * NOTE: What is this???
-	 */
 	private static final long serialVersionUID = 2458586688596203765L;
 
 	private Mastermind game;
@@ -73,8 +70,7 @@ public class Mastermind_GUI extends JFrame {
 	/* NOTE CONSTRUCTOR */
 
 	/*
-	 * NOTE: Interface code for images is janky and messy, no time to optimize it..
-	 * Methods don't accept enums as a parameter variable for some reason.
+	 * NOTE: Use enums as variables in future project.
 	 */
 	public Mastermind_GUI() {
 		setResizable(false);
@@ -130,7 +126,7 @@ public class Mastermind_GUI extends JFrame {
 		initiateLabels();
 
 		// Instanciates player inputs method with JComboBoxes.
-		// NOTE: Still have some warning errors.
+		// NOTE: Still have some warning errors due to erroneous usage of JComboBox
 		playerChoices = new JComboBox[game.getPlayerCode().length];
 
 		// Sets all JComboBoxes.
@@ -155,7 +151,8 @@ public class Mastermind_GUI extends JFrame {
 				btnSend.setEnabled(false);
 				if (!cypherLabels[0].isVisible()) {
 					setCypherVisibility(true);
-					JOptionPane.showMessageDialog(rootPane, "Wow, such amazing!\nYou completed this match in " + (game.getAttempt() + 1) + " tries.");
+					JOptionPane.showMessageDialog(rootPane, "Wow, such amazing!\nYou completed this match in " + (game
+							.getAttempt() + 1) + " tries.");
 				} else
 					JOptionPane.showMessageDialog(rootPane, "C-H-E-A-T-E-R");
 			} else if (game.isGameOver()) {
@@ -199,7 +196,8 @@ public class Mastermind_GUI extends JFrame {
 				if (findIconValue(colorLabels[game.getAttempt()][i].getToolTipText()) != -1)
 					game.setPlayerCode(i, findIconValue(colorLabels[game.getAttempt()][i].getToolTipText()));
 				else {
-					JOptionPane.showMessageDialog(rootPane, "Error, unknown value at index " + i + " of attempt number " + game.getAttempt() + ".");
+					JOptionPane.showMessageDialog(rootPane, "Error, unknown value at index " + i + " of attempt number " + game
+							.getAttempt() + ".");
 					break;
 				}
 			}
@@ -257,7 +255,7 @@ public class Mastermind_GUI extends JFrame {
 	/*
 	 * Instanciates and sets all labels to their default format.
 	 */
-	// NOTE: Code is messy and janky, no time to fix...
+	// NOTE: Labels initialization code is currently very messy and lacks flexibility.
 	private void initiateLabels() {
 
 		for (int i = 0; i < game.getMaxAttempts(); i++)
@@ -266,7 +264,8 @@ public class Mastermind_GUI extends JFrame {
 				if (j < colorLabels[i].length) {
 					colorLabels[i][j] = new JLabel(interfaceIcons[Interface.Empty.ordinal()]);
 					setLabelSize(colorLabels[i][j]);
-					colorLabels[i][j].setLocation((colorLabels[i][j].getWidth() + 100) * i + 50, (colorLabels[i][j].getHeight() + 50) * j + 50);
+					colorLabels[i][j].setLocation((colorLabels[i][j].getWidth() + 100) * i + 50, (colorLabels[i][j].getHeight()
+							+ 50) * j + 50);
 					colorLabels[i][j].setToolTipText(Interface.Empty.toString());
 					contentPane.add(colorLabels[i][j]);
 				}
@@ -281,7 +280,8 @@ public class Mastermind_GUI extends JFrame {
 					if (j < cypherLabels.length) {
 						cypherLabels[j] = new JLabel(colorIcons[game.getCypher()[j]]);
 						setLabelSize(cypherLabels[j]);
-						cypherLabels[j].setLocation(getWidth() - cypherLabels[j].getWidth() - 75, (cypherLabels[j].getHeight() + 50) * j + 50);
+						cypherLabels[j].setLocation(getWidth() - cypherLabels[j].getWidth() - 75, (cypherLabels[j].getHeight()
+								+ 50) * j + 50);
 						cypherLabels[j].setVisible(false);
 						setToolTip(cypherLabels[j]);
 						contentPane.add(cypherLabels[j]);
@@ -289,7 +289,8 @@ public class Mastermind_GUI extends JFrame {
 					if (j < hiddenLabels.length) {
 						hiddenLabels[j] = new JLabel(interfaceIcons[Interface.Hidden.ordinal()]);
 						setLabelSize(hiddenLabels[j]);
-						hiddenLabels[j].setLocation(getWidth() - hiddenLabels[j].getWidth() - 75, (hiddenLabels[j].getHeight() + 50) * j + 50);
+						hiddenLabels[j].setLocation(getWidth() - hiddenLabels[j].getWidth() - 75, (hiddenLabels[j].getHeight()
+								+ 50) * j + 50);
 						hiddenLabels[j].setToolTipText(Interface.Hidden.toString());
 						contentPane.add(hiddenLabels[j]);
 					}
